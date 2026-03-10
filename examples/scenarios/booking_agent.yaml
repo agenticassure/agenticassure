@@ -1,0 +1,45 @@
+suite:
+  name: booking-agent-tests
+  description: Tests for the flight booking agent
+  config:
+    default_timeout: 30
+    retries: 2
+
+scenarios:
+  - name: basic_flight_search
+    input: "Find me flights from NYC to London on June 15"
+    expected_tools:
+      - search_flights
+    expected_tool_args:
+      search_flights:
+        origin: "NYC"
+        destination: "London"
+    scorers:
+      - passfail
+      - regex
+    metadata:
+      regex_pattern: "(JFK|LHR|Heathrow)"
+
+  - name: handle_ambiguous_request
+    input: "I need to fly somewhere warm next week"
+    expected_tools:
+      - clarify_request
+    scorers:
+      - passfail
+    tags:
+      - edge-case
+      - clarification
+
+  - name: booking_confirmation
+    input: "Book flight AA123 for John Doe"
+    expected_tools:
+      - book_flight
+    expected_tool_args:
+      book_flight:
+        flight_id: "AA123"
+        passenger_name: "John Doe"
+    scorers:
+      - passfail
+    tags:
+      - booking
+      - critical

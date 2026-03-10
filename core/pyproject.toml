@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agenticassure"
+version = "0.1.0"
+description = "Test and benchmark LLM-powered AI agents before deployment"
+readme = "../README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    {name = "AgenticAssure Contributors"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "pydantic>=2.0,<3.0",
+    "pyyaml>=6.0",
+    "click>=8.0",
+    "rich>=13.0",
+    "jsonschema>=4.0",
+]
+
+[project.optional-dependencies]
+similarity = ["sentence-transformers>=2.0"]
+openai = ["openai>=1.0"]
+langchain = ["langchain>=0.1"]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.1",
+    "black>=23.0",
+]
+all = ["agenticassure[similarity,openai,langchain]"]
+
+[project.scripts]
+agenticassure = "agenticassure.cli:cli"
+
+[project.urls]
+Homepage = "https://github.com/agenticassure/agenticassure"
+Documentation = "https://docs.agenticassure.com"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agenticassure"]
