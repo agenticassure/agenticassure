@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agenticassure"
-version = "0.2.0"
+version = "0.3.0a0"
 description = "Test and benchmark LLM-powered AI agents before deployment"
 readme = "../README.md"
 license = "MIT"
