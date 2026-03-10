@@ -23,7 +23,7 @@ class CLIReporter:
         table.add_column("Status")
         table.add_column("Score", justify="right")
         table.add_column("Duration", justify="right")
-        table.add_column("Details", max_width=60)
+        table.add_column("Details")
 
         for sr in result.scenario_results:
             status = "[green]PASS[/green]" if sr.passed else "[red]FAIL[/red]"
@@ -33,8 +33,6 @@ class CLIReporter:
             avg_score = sum(s.score for s in sr.scores) / len(sr.scores) if sr.scores else 0.0
 
             details = sr.error or "; ".join(s.explanation for s in sr.scores)
-            if len(details) > 60:
-                details = details[:57] + "..."
 
             table.add_row(
                 sr.scenario.name,

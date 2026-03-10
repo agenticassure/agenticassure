@@ -10,7 +10,7 @@ from agenticassure.results import (
 )
 from agenticassure.scenario import Scenario, Suite, SuiteConfig
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
     "AgentResult",

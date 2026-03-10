@@ -60,7 +60,7 @@ class HTMLReporter:
     .badge {{ padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }}
     .badge.pass {{ background: #d4edda; color: #155724; }}
     .badge.fail {{ background: #f8d7da; color: #721c24; }}
-    .details {{ max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
+    .details {{ white-space: pre-wrap; word-break: break-word; }}
     tr.pass {{ background: #f8fff8; }}
     tr.fail {{ background: #fff8f8; }}
 </style>

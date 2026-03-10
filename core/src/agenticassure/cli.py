@@ -107,7 +107,7 @@ def _list_suites_dry_run(suites: list[Any], tags: list[str] | None) -> None:
     table = Table(title="Scenarios (dry run)")
     table.add_column("Suite", style="cyan")
     table.add_column("Scenario", style="bold")
-    table.add_column("Input", max_width=50)
+    table.add_column("Input")
     table.add_column("Scorers")
     table.add_column("Tags", style="dim")
 
@@ -119,7 +119,7 @@ def _list_suites_dry_run(suites: list[Any], tags: list[str] | None) -> None:
             table.add_row(
                 s.name,
                 scenario.name,
-                scenario.input[:50] + ("..." if len(scenario.input) > 50 else ""),
+                scenario.input,
                 ", ".join(scenario.scorers),
                 ", ".join(scenario.tags) if scenario.tags else "-",
             )
@@ -389,7 +389,7 @@ def list_scenarios(path: str, tag: tuple[str, ...], json_output: bool) -> None:
                     {
                         "suite": s.name,
                         "name": scenario.name,
-                        "input": scenario.input[:80],
+                        "input": scenario.input,
                         "scorers": scenario.scorers,
                         "tags": scenario.tags,
                     }
@@ -400,7 +400,7 @@ def list_scenarios(path: str, tag: tuple[str, ...], json_output: bool) -> None:
     table = Table(title="Scenarios")
     table.add_column("Suite", style="cyan")
     table.add_column("Name", style="bold")
-    table.add_column("Input", max_width=50)
+    table.add_column("Input")
     table.add_column("Scorers")
     table.add_column("Tags", style="dim")
 
@@ -412,7 +412,7 @@ def list_scenarios(path: str, tag: tuple[str, ...], json_output: bool) -> None:
             table.add_row(
                 s.name,
                 scenario.name,
-                scenario.input[:50] + ("..." if len(scenario.input) > 50 else ""),
+                scenario.input,
                 ", ".join(scenario.scorers),
                 ", ".join(scenario.tags) if scenario.tags else "-",
             )
