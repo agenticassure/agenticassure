@@ -9,6 +9,6 @@ from agenticassure.scorers.regex import RegexScorer
 
 # Similarity scorer requires optional dependencies (sentence-transformers)
 with contextlib.suppress(ImportError):
-    from agenticassure.scorers.similarity import SimilarityScorer
+    from agenticassure.scorers.similarity import SimilarityScorer  # noqa: F401
 
 __all__ = ["ExactMatchScorer", "PassFailScorer", "RegexScorer", "Scorer", "get_scorer"]
