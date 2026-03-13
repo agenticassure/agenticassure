@@ -4,6 +4,9 @@
 # Pro (commercial, closed-source)
 pro/
 
+# Website documentation (built separately)
+website-docs/
+
 # Python
 __pycache__/
 *.py[cod]

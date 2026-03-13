@@ -1,7 +1,5 @@
 """Tests for scenario and suite data models."""
 
-import pytest
-
 from agenticassure.scenario import Scenario, Suite, SuiteConfig
 
 

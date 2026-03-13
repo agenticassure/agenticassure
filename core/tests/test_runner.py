@@ -1,6 +1,6 @@
 """Tests for the test runner."""
 
-from typing import Any, Optional
+from typing import Any
 
 from agenticassure.results import AgentResult, ToolCall
 from agenticassure.runner import Runner
@@ -15,7 +15,7 @@ class MockAdapter:
         self.tool_calls = tool_calls or []
         self.call_count = 0
 
-    def run(self, input: str, context: Optional[dict[str, Any]] = None) -> AgentResult:
+    def run(self, input: str, context: dict[str, Any] | None = None) -> AgentResult:
         self.call_count += 1
         return AgentResult(
             output=self.output,
@@ -31,7 +31,7 @@ class FailingAdapter:
         self.fail_count = fail_count
         self.call_count = 0
 
-    def run(self, input: str, context: Optional[dict[str, Any]] = None) -> AgentResult:
+    def run(self, input: str, context: dict[str, Any] | None = None) -> AgentResult:
         self.call_count += 1
         if self.call_count <= self.fail_count:
             raise RuntimeError("Agent failed")

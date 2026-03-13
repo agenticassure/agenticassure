@@ -2,9 +2,9 @@
 
 from agenticassure.results import AgentResult, ToolCall
 from agenticassure.scenario import Scenario
+from agenticassure.scorers.exact import ExactMatchScorer
 from agenticassure.scorers.passfail import PassFailScorer
 from agenticassure.scorers.regex import RegexScorer
-from agenticassure.scorers.exact import ExactMatchScorer
 
 
 class TestPassFailScorer:

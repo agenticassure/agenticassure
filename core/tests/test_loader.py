@@ -1,7 +1,6 @@
 """Tests for YAML scenario loader."""
 
 import pytest
-from pathlib import Path
 
 from agenticassure.loader import (
     SUITE_SCHEMA,
@@ -13,7 +12,7 @@ from agenticassure.loader import (
 
 @pytest.fixture
 def sample_yaml(tmp_path):
-    content = '''suite:
+    content = """suite:
   name: test-suite
   description: Test suite
   config:
@@ -37,7 +36,7 @@ scenarios:
       - passfail
     tags:
       - tools
-'''
+"""
     file = tmp_path / "test_scenarios.yaml"
     file.write_text(content, encoding="utf-8")
     return file
@@ -45,10 +44,10 @@ scenarios:
 
 @pytest.fixture
 def invalid_yaml(tmp_path):
-    content = '''scenarios:
+    content = """scenarios:
   - name: missing_input
     tags: not-a-list
-'''
+"""
     file = tmp_path / "invalid.yaml"
     file.write_text(content, encoding="utf-8")
     return file
@@ -88,11 +87,11 @@ class TestValidation:
 
     def test_schema_errors_in_validate_file(self, tmp_path):
         """validate_scenario_file should include schema errors for wrong types."""
-        content = '''scenarios:
+        content = """scenarios:
   - name: bad_scenario
     input: "hello"
     tags: "not-a-list"
-'''
+"""
         f = tmp_path / "bad_tags.yaml"
         f.write_text(content, encoding="utf-8")
         issues = validate_scenario_file(f)
@@ -181,11 +180,11 @@ class TestSchemaValidation:
 
     def test_load_rejects_schema_invalid_file(self, tmp_path):
         """load_scenarios raises ValueError for schema-invalid YAML."""
-        content = '''scenarios:
+        content = """scenarios:
   - name: bad
     input: "hi"
     timeout_seconds: -1
-'''
+"""
         f = tmp_path / "bad.yaml"
         f.write_text(content, encoding="utf-8")
         with pytest.raises(ValueError, match="Schema validation failed"):

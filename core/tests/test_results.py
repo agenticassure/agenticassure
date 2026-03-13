@@ -1,5 +1,7 @@
 """Tests for result data models."""
 
+import pytest
+
 from agenticassure.results import (
     AgentResult,
     RunResult,
@@ -39,8 +41,9 @@ class TestScoreResult:
         assert sr.score == 0.5
 
     def test_score_invalid(self):
-        import pytest
-        with pytest.raises(Exception):
+        from pydantic import ValidationError
+
+        with pytest.raises(ValidationError):
             ScoreResult(scenario_id="x", scorer_name="test", score=1.5, passed=True)
 
 
@@ -48,9 +51,7 @@ class TestRunResult:
     def test_compute_aggregates(self):
         scenario = Scenario(name="s1", input="test")
         agent_result = AgentResult(output="response")
-        score = ScoreResult(
-            scenario_id=scenario.id, scorer_name="passfail", score=1.0, passed=True
-        )
+        score = ScoreResult(scenario_id=scenario.id, scorer_name="passfail", score=1.0, passed=True)
         sr = ScenarioRunResult(
             scenario=scenario,
             agent_result=agent_result,
