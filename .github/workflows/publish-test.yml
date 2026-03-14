@@ -18,6 +18,20 @@ jobs:
       - name: Install build tools
         run: pip install build
 
+      - name: Append .devN version suffix
+        run: |
+          VERSION=$(python -c "
+          import re
+          with open('core/pyproject.toml') as f:
+              content = f.read()
+          match = re.search(r'version\s*=\s*\"(.+?)\"', content)
+          print(match.group(1))
+          ")
+          DEV_VERSION="${VERSION}.dev${GITHUB_RUN_NUMBER}"
+          sed -i "s/version = \"${VERSION}\"/version = \"${DEV_VERSION}\"/" core/pyproject.toml
+          sed -i "s/__version__ = \"${VERSION}\"/__version__ = \"${DEV_VERSION}\"/" core/src/agenticassure/__init__.py
+          echo "Publishing version: ${DEV_VERSION}"
+
       - name: Build package
         run: python -m build core/
 
